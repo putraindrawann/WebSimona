@@ -20,11 +20,6 @@ class EmployeeService {
   delete(id) {
     return http.delete(`/employee/${id}`);
   }
-
-
-  findByTitle(name) {
-    return http.get(`/employee?name=${name}`);
-  }
 }
 
 export default new EmployeeService();
