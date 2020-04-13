@@ -1,9 +1,9 @@
 import React, { Component } from "react";
-import EmployeeService from "../../services/employee.service";
 import {  Card, CardBody, CardHeader, Col, Row, Table } from 'reactstrap';
 import { QRCode } from 'react-qrcode-logo';
 import Popup from "reactjs-popup";
 import jsPDF from 'jspdf';
+import axios from 'axios';
 
 
 export default class Employee extends Component {
@@ -22,16 +22,12 @@ export default class Employee extends Component {
   }
 
   getEmployee(id) {
-    EmployeeService.get(id)
-      .then(response => {
-        this.setState({
-          currentEmployee: response.data
-        });
-        console.log(response.data);
+    axios.get(`${process.env.REACT_APP_WS_URL}/employee?id=${id}`)
+    .then(res => {
+      this.setState({
+          currentemployee: res.data
       })
-      .catch(e => {
-        console.log(e);
-      });
+    });
   }
 
   jsPdfGenerator = () => { 
@@ -58,9 +54,7 @@ export default class Employee extends Component {
               <div key ="index" className="col-md-8">
                 <h5>Profile</h5>
                 <Row>
-                <div className="col-md-3">
-                  <img alt="employee" src={`https://robohash.org/${currentEmployee.id}?set=set5&size=200x200`}/>
-                </div>
+                
                 <div className="col-md-8">
                 <ul type="none">
                   <li><label><strong>Name: </strong>{currentEmployee.name}</label></li>

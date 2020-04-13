@@ -1,6 +1,7 @@
 {
   "name": "simona",
   "version": "0.1.0",
+  "homepage": "/",
   "private": true,
   "dependencies": {
     "@react-pdf/renderer": "^1.6.8",
@@ -47,5 +48,7 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "proxy": "http://18.136.210.143:3002"
 }
+
