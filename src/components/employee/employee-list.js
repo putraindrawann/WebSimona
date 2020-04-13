@@ -64,7 +64,10 @@ export default class AllEmployee extends Component {
                           
                         <tbody>
                               <tr>  
-                                <td>{employee.image}</td>
+                                <td><img 
+                                  src={employee.image}
+                                  alt="new"
+                                  /></td>
                                 <td>{employee.name}</td> 
                                 <td>{employee.address}</td> 
                                 <td>{employee.phone_number}</td> 

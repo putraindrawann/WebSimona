@@ -104,24 +104,11 @@ export default class Employee extends Component {
                         </thead>  
                         <tbody>
                               <tr>  
-                                <td>1</td> 
-                                <td>2020-08-01</td> 
-                                <td>08:01:05</td> 
-                                <td>20:21:11</td> 
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
                               </tr>
-                              <tr>  
-                                <td>2</td> 
-                                <td>2020-08-01</td> 
-                                <td>08:00:05</td> 
-                                <td>18:34:00</td> 
-                              </tr> 
-                              <tr>  
-                                <td>3</td> 
-                                <td>2020-08-01</td> 
-                                <td>19:21:11</td> 
-                                <td>19:21:11</td> 
-                              </tr>   
-                             
                         </tbody>  
                       </Table>  
                     </CardBody>  

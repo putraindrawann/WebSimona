@@ -14,7 +14,7 @@ export default class AllAttendance extends Component {
   }
 
   componentDidMount() {
-    axios.get(`${process.env.REACT_APP_WS_URL}/attendance/all`)
+    axios.get(`${process.env.REACT_APP_WS_URL}/attendance/list`)
     .then(res => {
       this.setState({
           attendance: res.data
@@ -42,17 +42,21 @@ export default class AllAttendance extends Component {
                       <Table hover bordered striped responsive size="sm">  
                         <thead>  
                           <tr>
-                            <th>Name</th>  
-                            <th>Site Name</th>  
-                            <th>Location</th>
+                            <th>Name</th> 
+                            <th>Date</th> 
+                            <th>Entered At</th>  
+                            <th>Out At</th>
+                            
                           </tr> 
                         </thead> 
-                        {attendance.map((attendance) => ( 
-                        <tbody>
+                        {attendance.map((attendance, index) => ( 
+                        <tbody key={index}>
                               <tr>
-                                <td>{attendance.name}</td> 
+                                <td>{attendance.id}</td> 
+                                <td>{attendance.date}</td>
                                 <td>{attendance.enter_at}</td> 
-                                <td>{attendance.location}</td>
+                                <td>{attendance.out_at}</td> 
+                               
                               </tr>
                         </tbody>  
                         ))} 
