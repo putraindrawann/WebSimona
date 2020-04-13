@@ -60,9 +60,9 @@ export default class AllEmployee extends Component {
                             <th>QR</th>
                           </tr> 
                         </thead> 
-                        {employee.map((employee) => ( 
+                        {employee.map((employee, index) => ( 
                           
-                        <tbody>
+                        <tbody key={index}>
                               <tr>  
                                 <td><img 
                                   src={employee.image}
@@ -75,7 +75,13 @@ export default class AllEmployee extends Component {
                                 <td>
                                   <Popup trigger={<button className="badge"> 
                                     Generate</button>}modal closeOnDocumentClick>
-                                  <QRCode value={employee.qrId} /></Popup>
+                                    <div>
+                                      <div><h3>{employee.name}</h3></div>
+                                      <div><QRCode value={employee.qrId}/></div>
+                                    </div>
+                                      
+                                  
+                                  </Popup>
                                 </td> 
                               </tr>
                         </tbody>  

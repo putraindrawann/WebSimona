@@ -3,25 +3,21 @@ import axios from 'axios';
 import {  Card, CardBody, CardHeader, Col, Row, Table } from 'reactstrap';
 
 
-export default class AllAttendance extends Component {
+export default class Sites extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      attendance: [],
-      attendances: [
-        'date'
-      ],
+      sites: [],
     };
 
   }
 
   componentDidMount() {
-    axios.get(`${process.env.REACT_APP_WS_URL}/attendance/list`)
+    axios.get(`${process.env.REACT_APP_WS_URL}/sites/all`)
     .then(res => {
       this.setState({
-        attendance : res.data,
-        attendances: res.data
+        sites : res.data,
       })
       console.log(res.data);
     });
@@ -29,37 +25,35 @@ export default class AllAttendance extends Component {
 
   render() {
     
-    const {attendance, attendances} = this.state;
+    const {sites} = this.state;
 
     return (
       <div className="col-lg">
 
-        <h1>Attendance List</h1>
+        <h1>Sites List</h1>
     <div className="animated fadeIn">
               <Row>  
                 <Col>  
                   <Card>  
                     <CardHeader>  
-                      <i className="fa fa-align-justify"></i> Attendences List  
+                      <i className="fa fa-align-justify"></i> Sites List  
                       </CardHeader>  
                     <CardBody>  
                       <Table hover bordered striped responsive size="sm">  
                         <thead>  
                           <tr>
-                            <th>Name</th>  
-                            <th>Date</th>  
-                            <th>Entered At</th>
-                            <th>Out At</th>
+                            <th>Site Name</th>  
+                            <th>Alias Name</th>  
+                            <th>Location</th>
                           </tr> 
                         </thead> 
-                        {attendance.map(( attendance, index, attendances) => ( 
+                        {
+                          sites.map((sites, index) => ( 
                         <tbody key={index}>
                               <tr>
-                                <td>{attendance.id}</td> 
-                                {/* <td>{attendance.attendances.date}</td> */}
-                                <td>{attendance.date}</td>
-                                <td>{attendance.enter_at}</td>
-                                <td>{attendance.out_at}</td>
+                                <td>{sites.site_name}</td> 
+                                <td>{sites.alias_name}</td>
+                                <td>{sites.location}</td>
                               </tr>
                         </tbody>  
                         ))} 

@@ -19,8 +19,8 @@ export default class Addemployee extends Component {
             birth_date:'',
             identity:'',
             distant_relative:'',
-            place:''
-            // SiteMasterId:''
+            place:'',
+            siteName:''
         };
     
       }
@@ -55,12 +55,15 @@ export default class Addemployee extends Component {
         birth_date:'',
         identity:'',
         distant_relative:'',
-        place:''
+        place:'',
+        siteName:''
+
     });
   }
   
   render() {
-    const { name, qrId, nfcId,gender,blood_type,image,phone_number,address,birth_place,birth_date,identity , distant_relative, place } = this.state
+    const { name, qrId, nfcId,gender,blood_type,image,phone_number,address,birth_place,birth_date,identity , 
+        distant_relative, place, siteName } = this.state
 
     if (this.state.toDashboard === true) {
         return <Redirect to='/employee/all' />
@@ -95,7 +98,7 @@ export default class Addemployee extends Component {
                   <InputGroup  sm={2} className="mb-4">
                     {/* <Input type="text" placeholder="Gender" name="gender" value={gender} onChange={ this.onChange }  />   */}
                     
-                    <select class="custom-select" name="gender" value={gender} onChange={ this.onChange }>
+                    <select className="custom-select" name="gender" value={gender} onChange={ this.onChange }>
                         <option selected>Choose Gender</option>
                         <option value="male">Male</option>
                         <option value="female">Female</option>
@@ -134,9 +137,9 @@ export default class Addemployee extends Component {
                     <Input type="text" placeholder="Place" name="place" value={place} onChange={ this.onChange }  />  
                   </InputGroup>   
 
-                  {/* <InputGroup className="mb-4">
-                    <Input type="text" placeholder="Site" name="SiteMasterId" value={SiteMasterId} onChange={ this.onChange }  />  
-                  </InputGroup>  */}
+                  <InputGroup className="mb-4">
+                    <Input type="text" placeholder="Site Name" name="siteName" value={siteName} onChange={ this.onChange }  />  
+                  </InputGroup> 
 
              <CardFooter className="p-4">  
                 <Row>  

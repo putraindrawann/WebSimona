@@ -9,7 +9,6 @@ import axios from 'axios';
 export default class Employee extends Component {
   constructor(props) {
     super(props);
-    this.getEmployee = this.getEmployee.bind(this);
 
     this.state = {
       currentEmployee: [],
@@ -18,17 +17,15 @@ export default class Employee extends Component {
   }
 
   componentDidMount() {
-    this.getEmployee(this.props.match.params.id);
-  }
-
-  getEmployee(id) {
-    axios.get(`${process.env.REACT_APP_WS_URL}/employee?id=${id}`)
+    axios.get(`${process.env.REACT_APP_WS_URL}/employee?id=$`)
     .then(res => {
       this.setState({
           currentemployee: res.data
       })
     });
   }
+
+ 
 
   jsPdfGenerator = () => { 
     const { currentEmployee } = this.state;

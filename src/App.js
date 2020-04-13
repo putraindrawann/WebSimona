@@ -9,6 +9,8 @@ import Employee from "./components/employee/employee";
 import AllEmployee from "./components/employee/employee-list";
 import AllAttendance from "./components/attendance/attendance";
 import Addemployee from "./components/employee/add-employee";
+import Login from "./components/login";
+import Sites from "./components/site";
 
 class App extends Component {
   render() {
@@ -31,14 +33,21 @@ class App extends Component {
                   Attendences
                 </Link>
               </li>
+              <li className="nav-item">
+                <Link to={"/sites"} className="nav-link">
+                  Sites
+                </Link>
+              </li>
             </div>
           </Nav>
 
           <div className="container mt-3">
             <Switch>
-              <Route path={["/employee"]} component={AllEmployee} />
-              <Route path={["/attendance"]} component={AllAttendance} />
-              <Route path={["/addemployee"]} component={Addemployee} />
+              <Route path="/employee" component={AllEmployee} />
+              <Route path="/attendance" component={AllAttendance} />
+              <Route path="/addemployee" component={Addemployee} />
+              <Route path="/sites" component={Sites}/>
+              <Route path="/login" component={Login}/>
               <Route path="/:id" component={Employee} />
             </Switch>
           </div>
