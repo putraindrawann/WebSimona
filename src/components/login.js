@@ -40,7 +40,7 @@ class Login extends Component {
             console.log(userresponse.data);
             if(userresponse){
             sessionStorage.setItem('data',JSON.stringify(userresponse));
-            // isi token
+            // kolom ini buat isi token
             this.props.history.push({pathname: '/home'});
             }
             

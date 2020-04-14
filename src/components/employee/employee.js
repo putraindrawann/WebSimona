@@ -80,6 +80,10 @@ export default class Employee extends Component {
     return (
       <div>
         <Navigation />
+      
+
+      <div className="col-lg">
+        
 
             {currentEmployee.map(currentEmployee => (
               <div key ="index" className="col-md-8">
@@ -155,6 +159,7 @@ export default class Employee extends Component {
               </Row>
                  
             </div>
+      </div>
       </div>
     );
   }

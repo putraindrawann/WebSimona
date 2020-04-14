@@ -29,8 +29,11 @@ export default class AllAttendance extends Component {
     const {attendance} = this.state;
 
     return (
-      <div className="col-lg">
+      <div>
         <Navigation />
+      
+      <div className="col-lg">
+        
 
         <h1>Attendance List</h1>
     <div className="animated fadeIn">
@@ -68,6 +71,7 @@ export default class AllAttendance extends Component {
               
             </div>
 
+      </div>
       </div>
     );
   }

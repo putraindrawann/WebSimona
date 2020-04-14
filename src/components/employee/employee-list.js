@@ -62,8 +62,11 @@ export default class AllEmployee extends Component {
     //   );
 
     return (
-      <div className="col-lg">
+      <div>
         <Navigation />
+      
+      <div className="col-lg">
+        
 
           <div className="col-md-8">
                     <div className="input-group mb-3">
@@ -139,6 +142,7 @@ export default class AllEmployee extends Component {
               
             </div>
 
+      </div>
       </div>
     );
   }

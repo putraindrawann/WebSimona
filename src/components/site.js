@@ -29,8 +29,11 @@ export default class Sites extends Component {
     const {sites} = this.state;
 
     return (
-      <div className="col-lg">
+      <div>
         <Navigation />
+      
+      <div className="col-lg">
+        
         <h1>Sites List</h1>
     <div className="animated fadeIn">
       
@@ -63,10 +66,9 @@ export default class Sites extends Component {
                     </CardBody>  
                   </Card>  
                 </Col>  
-              </Row> 
-              
+              </Row>
             </div>
-
+        </div>
       </div>
     );
   }
