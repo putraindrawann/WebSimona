@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import axios from 'axios';  
 import { Button, Card, CardBody, CardFooter, Col, Container, Form, Input, InputGroup, Row } from 'reactstrap';  
 import { Redirect } from "react-router-dom";
+import Navigation from "../Nav"
 
 export default class Addemployee extends Component {  
     constructor(props) {
@@ -70,6 +71,11 @@ export default class Addemployee extends Component {
       }
 
   return (  
+    <div>
+
+    
+    <Navigation />
+
     <div className="app flex-row align-items-center">  
       <Container>  
         <Row className="justify-content-center">  
@@ -99,7 +105,7 @@ export default class Addemployee extends Component {
                     {/* <Input type="text" placeholder="Gender" name="gender" value={gender} onChange={ this.onChange }  />   */}
                     
                     <select className="custom-select" name="gender" value={gender} onChange={ this.onChange }>
-                        <option selected>Choose Gender</option>
+                        <option >Choose Gender</option>
                         <option value="male">Male</option>
                         <option value="female">Female</option>
                     </select>
@@ -160,7 +166,9 @@ export default class Addemployee extends Component {
           </Col>  
         </Row>  
       </Container>  
+    </div> 
     </div>  
-    ) 
+    )
+    
   } 
 }  

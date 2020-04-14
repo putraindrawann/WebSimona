@@ -11,12 +11,29 @@ export default class Employee extends Component {
   constructor(props) {
     super(props);
     this.getEmployee = this.getEmployee.bind(this);
+    this.getAttendanceByEmployeeID = this.getAttendanceByEmployeeID.bind(this);
 
     this.state = {
       currentEmployee: [],
+      Employeeattendance: null,
 
     };
   }
+
+  getAttendanceByEmployeeID(id) {
+    axios.get(`${process.env.REACT_APP_WS_URL}/attendance?id=${id}`)
+      .then(response => {
+        this.setState({
+          Employeeattendance: response.data
+        });
+        // console.log("=======")
+        // console.log(response.data);
+      })
+      .catch(e => {
+        // console.log(e);
+      });
+  }
+
 
   getEmployee(id) {
     axios.get(`${process.env.REACT_APP_WS_URL}/employee?id=${id}`)
@@ -24,22 +41,25 @@ export default class Employee extends Component {
         this.setState({
           currentEmployee: response.data
         });
-        console.log(response.data);
+        // console.log(response.data);
       })
       .catch(e => {
-        console.log(e);
+        // console.log(e);
       });
   }
 
 
   componentDidMount() {
     this.getEmployee(this.props.match.params.id);
+    this.getAttendanceByEmployeeID(this.props.match.params.id);
   }
 
  
 
   jsPdfGenerator = () => { 
     const { currentEmployee } = this.state;
+
+
     currentEmployee.map(currentEmployee => {
       
     var doc = new jsPDF('p','pt');
@@ -55,7 +75,8 @@ export default class Employee extends Component {
   }
 
   render() {
-    const { currentEmployee } = this.state;
+    const { currentEmployee, Employeeattendance } = this.state;
+  
     return (
       <div>
         <Navigation />
@@ -96,7 +117,9 @@ export default class Employee extends Component {
           <button onClick={this.jsPdfGenerator} >Print</button>
         </div><br/>
         
-        <div className="animated fadeIn">  
+        <div className="animated fadeIn">
+
+          
               <Row>  
                 <Col>  
                   <Card>  
@@ -107,25 +130,30 @@ export default class Employee extends Component {
                       <Table hover bordered striped responsive size="sm">  
                         <thead>  
                           <tr>  
-                            <th>Id</th>  
+                            <th>Id</th>
                             <th>Date</th>  
                             <th>Entered At</th>  
                             <th>Out At</th>
                           </tr> 
-                        </thead>  
-                        <tbody>
-                              <tr>  
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
+                        </thead>
+                        <tbody>  
+                        {Employeeattendance && Employeeattendance.attendances.map(attendance => (
+                        
+                              <tr key={attendance.id}>  
+                                <td>{attendance.id}</td>
+                                <td>{attendance.date}</td>
+                                <td>{attendance.enter_at}</td>
+                                <td>{attendance.out_at}</td>
                               </tr>
+                         
+                        ))}
                         </tbody>  
                       </Table>  
                     </CardBody>  
                   </Card>  
                 </Col>  
-              </Row>  
+              </Row>
+                 
             </div>
       </div>
     );

@@ -18,8 +18,7 @@ export default class AllAttendance extends Component {
     axios.get(`${process.env.REACT_APP_WS_URL}/attendance/list`)
     .then(res => {
       this.setState({
-        attendance : res.data,
-        attendances: res.data
+        attendance : res.data
       })
       console.log(res.data);
     });
