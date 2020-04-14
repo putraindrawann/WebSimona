@@ -11,13 +11,21 @@ import AllAttendance from "./components/attendance/attendance";
 import Addemployee from "./components/employee/add-employee";
 import Login from "./components/login";
 import Sites from "./components/site";
+import InPage from "./InPage";
 
 class App extends Component {
+  constructor(props){
+    super(props);
+    this.state={
+      loggedIn : false
+    }
+  }
+
   render() {
     return (
       <Router>
           <Nav className="navbar navbar-custom navbar-expand navbar-dark">
-            <a href="/employee" className="navbar-brand ">
+            <a href="/home" className="navbar-brand ">
               SIMONA
             </a>
             <div className="navbar-nav ">
@@ -43,9 +51,10 @@ class App extends Component {
 
           <div className="container mt-3">
             <Switch>
+              <Route path="/home" component={InPage}/>
               <Route path="/login" component={Login}/>
               {/* <Route path="/employee" component={AllEmployee} /> */}
-              <Route exact path={["/employee", "/employee/all"]} component={AllEmployee} />
+              <Route exact path={["/employee", "/employee/all"]} component={AllEmployee} onEnter={this.requireAuth}/>
               <Route path="/attendance" component={AllAttendance} />
               <Route path="/addemployee" component={Addemployee} />
               <Route path="/sites" component={Sites}/>

@@ -10,8 +10,11 @@ export default class AllEmployee extends Component {
     super(props);
 
     this.state = {
-      employee: []
+      employee: [],
       // searchField: ''
+      isLoaded: false,
+      redirectToReferrer:false,
+      token:''
     };
 
   }
@@ -88,8 +91,8 @@ export default class AllEmployee extends Component {
                                 <td>
                                   <Popup trigger={<button className="badge"> 
                                     Generate</button>}>
-                                    <div>
-                                      <h3 style={{textAlign: "center",}}>{employee.name}</h3>
+                                    <div style={{textAlign: "center",}}>
+                                      <h3>{employee.name}</h3>
                                       <div><QRCode value={employee.qrId}/></div>
                                     </div>
                                   </Popup>
