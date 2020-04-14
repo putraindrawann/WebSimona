@@ -1,10 +1,9 @@
 import React, { Component } from 'react'  
 import axios from 'axios';  
 import { Button, Card, CardBody, Col, Container, Form, Input, InputGroup, Row } from 'reactstrap';  
-import { Redirect } from "react-router-dom";
 
 
-export default class Login extends Component {  
+class Login extends Component {  
       constructor(props){
         super(props);
         this.state = {
@@ -34,35 +33,25 @@ export default class Login extends Component {
             
       if(this.state.user_name && this.state.password)      
         {
-    axios.post(`http://localhost:3000/auth`,admin)
+    axios.post(`${process.env.REACT_APP_WS_URL}/auth`,admin)
     .then((response) =>
         { 
             let userresponse = response;
             console.log(userresponse.data);
             if(userresponse){
             sessionStorage.setItem('data',JSON.stringify(userresponse));
-            this.setState({redirectToReferrer: true});
+            // isi token
+            this.props.history.push({pathname: '/home'});
             }
             
         },this)
         .catch((error) => alert(error))
-                  
+      }
     }
-    }
-
 
 
     render (){
-        // const { user_name, password} = this.state;
-        if (this.state.redirectToReferrer === true){
-        
-          return (<Redirect to={'/employee/all'}/>)
-          }
-          if (sessionStorage.getItem('data')){
-          
-              return (<Redirect to={'/employee/all'}/>)
-              }
-
+      console.log(this.props)
 
         return (
             <div className="app flex-row align-items-center">  
@@ -98,3 +87,5 @@ export default class Login extends Component {
         );
     } 
 }
+
+export default Login;

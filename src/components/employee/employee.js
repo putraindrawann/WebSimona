@@ -4,6 +4,7 @@ import { QRCode } from 'react-qrcode-logo';
 import Popup from "reactjs-popup";
 import jsPDF from 'jspdf';
 import axios from 'axios';
+import Navigation from "../Nav";
 
 
 export default class Employee extends Component {
@@ -57,11 +58,13 @@ export default class Employee extends Component {
     const { currentEmployee } = this.state;
     return (
       <div>
+        <Navigation />
+
             {currentEmployee.map(currentEmployee => (
               <div key ="index" className="col-md-8">
                 <h5>Employee Profile</h5>
                 <Row>
-                <div><img src={currentEmployee.image}alt="new"/></div>
+                <div><img src={"http://" + currentEmployee.image}alt="new"/></div>
                 <div className="col-md-8">
                 <ul type="none">
                   <li><label><strong>Name: </strong>{currentEmployee.name}</label></li>

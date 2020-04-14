@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import axios from 'axios';
 import {  Card, CardBody, CardHeader, Col, Row, Table } from 'reactstrap';
+import Navigation from "./Nav";
 
 
 export default class Sites extends Component {
@@ -29,9 +30,10 @@ export default class Sites extends Component {
 
     return (
       <div className="col-lg">
-
+        <Navigation />
         <h1>Sites List</h1>
     <div className="animated fadeIn">
+      
               <Row>  
                 <Col>  
                   <Card>  

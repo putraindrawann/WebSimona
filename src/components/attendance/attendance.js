@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import axios from 'axios';
 import {  Card, CardBody, CardHeader, Col, Row, Table } from 'reactstrap';
+import Navigation from "../Nav";
 
 
 export default class AllAttendance extends Component {
@@ -8,10 +9,7 @@ export default class AllAttendance extends Component {
     super(props);
 
     this.state = {
-      attendance: [],
-      attendances: [
-        'date'
-      ],
+      attendance: []
     };
 
   }
@@ -33,6 +31,7 @@ export default class AllAttendance extends Component {
 
     return (
       <div className="col-lg">
+        <Navigation />
 
         <h1>Attendance List</h1>
     <div className="animated fadeIn">
@@ -52,14 +51,13 @@ export default class AllAttendance extends Component {
                             <th>Out At</th>
                           </tr> 
                         </thead> 
-                        {attendance.map(( attendance, index, attendances) => ( 
+                        {attendance.map(( attendance, index) => ( 
                         <tbody key={index}>
                               <tr>
-                                <td>{attendance.id}</td> 
-                                {/* <td>{attendance.attendances.date}</td> */}
-                                <td>{attendance.date}</td>
-                                <td>{attendance.enter_at}</td>
-                                <td>{attendance.out_at}</td>
+                                <td>{attendance.employee.name}</td> 
+                                <td>{attendance.attendance.date}</td>
+                                <td>{attendance.attendance.enter_at}</td>
+                                <td>{attendance.attendance.out_at}</td>
                               </tr>
                         </tbody>  
                         ))} 

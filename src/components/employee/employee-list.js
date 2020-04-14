@@ -4,31 +4,24 @@ import {  Card, CardBody, CardHeader, Col, Row, Table } from 'reactstrap';
 import { Link } from "react-router-dom";
 import { QRCode } from 'react-qrcode-logo';
 import Popup from "reactjs-popup";
+import Navigation from "../Nav";
+
 
 export default class AllEmployee extends Component {
   constructor(props) {
     super(props);
+    this.onChangeSearchName = this.onChangeSearchName.bind(this);
+    this.searchName = this.searchName.bind(this);
 
     this.state = {
       employee: [],
-      // searchField: ''
       isLoaded: false,
       redirectToReferrer:false,
-      token:''
+      token:'',
+      searchName: ""
     };
 
   }
-
-  getDataId = e => {
-    axios
-        .get(`${process.env.REACT_APP_WS_URL}/employee/${e.target.value}`)
-        .then(res => {
-            this.setState({
-                employee: res.data
-            })
-        });
-
-}
 
 
 
@@ -41,19 +34,57 @@ export default class AllEmployee extends Component {
     });
   }
 
+  onChangeSearchName(e) {
+    const searchName= e.target.value;
+
+    this.setState({
+      searchName: searchName
+    });
+  }
+
+  searchName() {
+    axios.get(`${process.env.REACT_APP_WS_URL}/employee?name=${this.state.searchName}`)
+      .then(response => {
+        this.setState({
+          tutorials: response.data
+        });
+        console.log(response.data);
+      })
+      .catch(e => {
+        console.log(e);
+      });
+  }
+
   render() {
-    const {employee} = this.state;
+    const {employee, searchName} = this.state;
     // const filteredEmployee = employee.filter(employee =>
     //   employee.name.toLowerCase().includes(searchField.toLowerCase())
     //   );
 
     return (
       <div className="col-lg">
-        <div className="input-group-prepend">
-          <input className="form-control" type='search' placeholder='search employee'  
-          onChange={e => this.setState({ searchField: e.target.value })}
-         />
-        </div>
+        <Navigation />
+
+          <div className="col-md-8">
+                    <div className="input-group mb-3">
+                      <input
+                        type="text"
+                        className="form-control"
+                        placeholder="Search Employee Name"
+                        value={searchName}
+                        onChange={this.onChangeSearchName}
+                      />
+                      <div className="input-group-append">
+                        <button
+                          className="btn btn-outline-secondary"
+                          type="button"
+                          onClick={this.searchName}
+                        >
+                          Search
+                        </button>
+                      </div>
+                    </div>
+                  </div>
 
 
         <h1>Employee List</h1>
@@ -81,7 +112,7 @@ export default class AllEmployee extends Component {
                         <tbody key={index}>
                               <tr>  
                                 <td><img 
-                                  src={employee.image}
+                                  src={"http://" + employee.image}
                                   alt="new"
                                   /></td>
                                 <td>{employee.name}</td> 
