@@ -29,7 +29,7 @@ export default class AllAttendance extends Component {
 
   render() {
     
-    const {attendance, attendances} = this.state;
+    const {attendance} = this.state;
 
     return (
       <div className="col-lg">

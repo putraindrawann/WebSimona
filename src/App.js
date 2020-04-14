@@ -16,8 +16,8 @@ class App extends Component {
   render() {
     return (
       <Router>
-          <Nav className="navbar navbar-custom navbar-expand navbar-light">
-            <a href="/" className="navbar-brand ">
+          <Nav className="navbar navbar-custom navbar-expand navbar-dark">
+            <a href="/employee" className="navbar-brand ">
               SIMONA
             </a>
             <div className="navbar-nav ">
@@ -43,12 +43,14 @@ class App extends Component {
 
           <div className="container mt-3">
             <Switch>
-              <Route path="/employee" component={AllEmployee} />
+              <Route path="/login" component={Login}/>
+              {/* <Route path="/employee" component={AllEmployee} /> */}
+              <Route exact path={["/employee", "/employee/all"]} component={AllEmployee} />
               <Route path="/attendance" component={AllAttendance} />
               <Route path="/addemployee" component={Addemployee} />
               <Route path="/sites" component={Sites}/>
-              <Route path="/login" component={Login}/>
-              <Route path="/:id" component={Employee} />
+              <Route path="/employee/:id" component={Employee} />
+              
             </Switch>
           </div>
         

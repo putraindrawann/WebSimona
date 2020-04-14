@@ -16,6 +16,19 @@ export default class AllEmployee extends Component {
 
   }
 
+  getDataId = e => {
+    axios
+        .get(`${process.env.REACT_APP_WS_URL}/employee/${e.target.value}`)
+        .then(res => {
+            this.setState({
+                employee: res.data
+            })
+        });
+
+}
+
+
+
   componentDidMount() {
     axios.get(`${process.env.REACT_APP_WS_URL}/employee/all`)
     .then(res => {
@@ -71,16 +84,14 @@ export default class AllEmployee extends Component {
                                 <td>{employee.name}</td> 
                                 <td>{employee.address}</td> 
                                 <td>{employee.phone_number}</td> 
-                                <td><Link to={"/" + employee.id} >View Profile</Link> </td>
+                                <td><Link to={"/employee/" + employee.id} >View Profile</Link></td>
                                 <td>
                                   <Popup trigger={<button className="badge"> 
-                                    Generate</button>}modal closeOnDocumentClick>
+                                    Generate</button>}>
                                     <div>
-                                      <div><h3>{employee.name}</h3></div>
+                                      <h3 style={{textAlign: "center",}}>{employee.name}</h3>
                                       <div><QRCode value={employee.qrId}/></div>
                                     </div>
-                                      
-                                  
                                   </Popup>
                                 </td> 
                               </tr>
