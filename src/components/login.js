@@ -53,8 +53,11 @@ class Login extends Component {
         return (
             <div className="app flex-row align-items-center">  
             <Container>  
+              <div>
+                
+              </div>
               <Row className="justify-content-center">
-                <img src="/smmlogo.png" alt="images" width="150" height="150"/>
+                <img src={require("../assets/smmlogo.png")} alt="images" width="150" height="150"/>
               </Row>
               <br/>
       

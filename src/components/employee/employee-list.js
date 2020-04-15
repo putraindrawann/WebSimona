@@ -95,6 +95,7 @@ export default class AllEmployee extends Component {
                             <th>Phone</th>
                             <th>Profile</th>
                             <th>QR</th>
+                            
                           </tr> 
                         </thead> 
                         {filteredEmployee.map((employee, index) => ( 
