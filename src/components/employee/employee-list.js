@@ -21,7 +21,6 @@ export default class AllEmployee extends Component {
   }
 
 
-
   componentDidMount() {
     axios.get(`${process.env.REACT_APP_WS_URL}/employee/all`)
     .then(res => {
@@ -48,15 +47,15 @@ export default class AllEmployee extends Component {
         console.log(response.data);
       })
       .catch(e => {
-        // console.log(e);
+        console.log(e);
       });
   }
 
   render() {
     const {employee, searchName} = this.state;
-    // const filteredEmployee = employee.filter(employee =>
-    //   employee.name.toLowerCase().includes(searchField.toLowerCase())
-    //   );
+    const filteredEmployee = employee.filter(employee =>
+      employee.name.toLowerCase().includes(searchName.toLowerCase())
+      );
 
     return (
       <div>
@@ -74,15 +73,6 @@ export default class AllEmployee extends Component {
                         value={searchName}
                         onChange={this.onChangeSearchName}
                       />
-                      <div className="input-group-append">
-                        <button
-                          className="btn btn-outline-secondary"
-                          type="button"
-                          onClick={this.searchName}
-                        >
-                          Search
-                        </button>
-                      </div>
                     </div>
                   </div>
 
@@ -107,7 +97,7 @@ export default class AllEmployee extends Component {
                             <th>QR</th>
                           </tr> 
                         </thead> 
-                        {employee.map((employee, index) => ( 
+                        {filteredEmployee.map((employee, index) => ( 
                           
                         <tbody key={index}>
                               <tr>  

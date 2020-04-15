@@ -2,8 +2,6 @@ import React, { Component } from "react";
 import { HashRouter as Router, Route} from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
-
-
 import Employee from "./components/employee/employee";
 import AllEmployee from "./components/employee/employee-list";
 import AllAttendance from "./components/attendance/attendance";

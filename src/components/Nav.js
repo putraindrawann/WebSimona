@@ -10,7 +10,7 @@ export default class Navigation extends Component {
 
  handleLogout() {
   sessionStorage.clear();
-  this.props.history.replace({pathname: '/'});
+  // this.props.history.push({pathname: '/'});
   }
 
     render() {
@@ -46,7 +46,10 @@ export default class Navigation extends Component {
                 </Link>
               </li>
             </div>
-            <Link to="/"><Button size="tiny" onClick={this.handleLogout}>Logout</Button></Link>
+            <div className="logout">
+              <Link to="/"><Button onClick={this.handleLogout}>Logout</Button></Link>
+            </div>
+            
           </Nav>
         )
 

@@ -20,7 +20,7 @@ export default class Sites extends Component {
       this.setState({
         sites : res.data,
       })
-      console.log(res.data);
+      // console.log(res.data);
     });
   }
 

@@ -19,12 +19,13 @@
   
 } 
 
+
 .button-form{
   background-color: rgb(250, 23, 23);
 }
 
-.logout-button{
-  margin-left: 650px;
+.logout{
+  margin-left: 700px;
 }
 
 

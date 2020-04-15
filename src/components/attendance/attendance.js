@@ -20,7 +20,7 @@ export default class AllAttendance extends Component {
       this.setState({
         attendance : res.data
       })
-      console.log(res.data);
+      // console.log(res.data);
     });
   }
 

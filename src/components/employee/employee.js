@@ -2,21 +2,23 @@ import React, { Component } from "react";
 import {  Card, CardBody, CardHeader, Col, Row, Table } from 'reactstrap';
 import { QRCode } from 'react-qrcode-logo';
 import Popup from "reactjs-popup";
-import jsPDF from 'jspdf';
 import axios from 'axios';
 import Navigation from "../Nav";
+import Report from "./Report";
 
 
 export default class Employee extends Component {
+
   constructor(props) {
     super(props);
     this.getEmployee = this.getEmployee.bind(this);
     this.getAttendanceByEmployeeID = this.getAttendanceByEmployeeID.bind(this);
-
+    
+    
     this.state = {
       currentEmployee: [],
       Employeeattendance: null,
-
+      
     };
   }
 
@@ -54,35 +56,48 @@ export default class Employee extends Component {
     this.getAttendanceByEmployeeID(this.props.match.params.id);
   }
 
- 
 
-  jsPdfGenerator = () => { 
-    const { currentEmployee , Employeeattendance} = this.state;
+  
+  ReportData = () => {
+    var report = new Report();
+    const { Employeeattendance, currentEmployee} = this.state;
 
-    var doc = new jsPDF('p','pt');
-    currentEmployee.map(currentEmployee => {
-      
-    
-    doc.text(100,40, 'Absence Employee')
-    doc.text(100, 80, 'Nama                      : '+currentEmployee.name)
-    doc.text(100, 100, 'Birth Place & Date  : '+currentEmployee.birth_place+','+currentEmployee.birth_date)
-    doc.text(100, 120, 'Adress                    : '+currentEmployee.address)
-    doc.text(100, 140, 'Site                         : '+currentEmployee.place)
-    doc.save(`Absence ${currentEmployee.name}.pdf`);
+        currentEmployee.map(currentEmployee => {
+          report.title = (currentEmployee.name)
+            
+          return currentEmployee;
+        });
 
-    return currentEmployee;
-    })
+        Employeeattendance && Employeeattendance.attendances.map(attendance => {
+        report.content = 
+        [
+          {
+            "id":(attendance.id),
+            "date":(attendance.date),
+            "enter_at":(attendance.enter_at),
+            "out_at":(attendance.out_at)
+          }
+        ]
+        return Employeeattendance;
+       })
+        
+        axios.request({
+            url: `http://smm.mylabstudio.info/api-report/report`,
+            method: 'POST',
+            responseType: 'blob',
+            timeout: 30000,
+            data: report
+        }).then((response) => {
+            const blob = response.data;
+            const link = document.createElement('a');
+            link.href = window.URL.createObjectURL(new Blob([blob]));
+            link.setAttribute('download', `attendance-report.pdf`);
+            document.body.appendChild(link);
+            link.click();
+            link.remove();
+        })
+	}
 
-    Employeeattendance && Employeeattendance.attendances.map(attendance => {
-           
-      doc.text( attendance.id)
-      doc.text( attendance.date)
-      doc.text( attendance.enter_at)
-      doc.text( attendance.out_at)
-      
-      return Employeeattendance;
-    })
-  }
 
   render() {
     const { currentEmployee, Employeeattendance } = this.state;
@@ -90,11 +105,9 @@ export default class Employee extends Component {
     return (
       <div>
         <Navigation />
-      
-
-      <div className="col-lg">
+        <br />
         
-
+      <div className="col-lg">
             {currentEmployee.map(currentEmployee => (
               <div key ="index" className="col-md-8">
                 <h5>Employee Profile</h5>
@@ -111,6 +124,7 @@ export default class Employee extends Component {
                   <li><label><strong>Identity : </strong>{currentEmployee.identity}</label></li>
                   <li><label><strong>Departement : </strong>{currentEmployee.departement}</label></li>
                   <li><label><strong>Position : </strong>{currentEmployee.position}</label></li>
+                  <li><label><strong>Site : </strong>{currentEmployee.place}</label></li>
                   <li><label><strong>NFC Id : </strong>{currentEmployee.nfcId}</label></li>
                   <li><label><strong>QR Id : </strong>{currentEmployee.qrId}</label></li>
                   <li><label>
@@ -122,7 +136,6 @@ export default class Employee extends Component {
                                     </div>
                                   </Popup>
                   </label></li>
-                  <li><label><strong>Site : </strong>{currentEmployee.place}</label></li>
                 </ul>
                 </div>
                 </Row>
@@ -130,12 +143,12 @@ export default class Employee extends Component {
               ))}
               
         <div style={{textAlign: "right"}}>
-          <button onClick={this.jsPdfGenerator} >Print</button>
+          {/* <button onClick={this.jsPdfGenerator} >Print</button> */}
+          <button onClick={this.ReportData} >Print</button>
         </div><br/>
         
         <div className="animated fadeIn">
 
-          
               <Row>  
                 <Col>  
                   <Card>  
@@ -154,7 +167,6 @@ export default class Employee extends Component {
                         </thead>
                         <tbody>  
                         {Employeeattendance && Employeeattendance.attendances.map(attendance => (
-                        
                               <tr key={attendance.id}>  
                                 <td>{attendance.id}</td>
                                 <td>{attendance.date}</td>

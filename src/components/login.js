@@ -54,7 +54,7 @@ class Login extends Component {
             <div className="app flex-row align-items-center">  
             <Container>  
               <Row className="justify-content-center">
-                <img src="/smmlogo.png" alt="new" width="150" height="150"/>
+                <img src="/smmlogo.png" alt="images" width="150" height="150"/>
               </Row>
               <br/>
       
