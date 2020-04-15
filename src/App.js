@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { BrowserRouter as Router, Route} from "react-router-dom";
+import { HashRouter as Router, Route} from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 
@@ -13,23 +13,18 @@ import Sites from "./components/site";
 import InPage from "./components/InPage";
 
 class App extends Component {
-  constructor(props){
-    super(props);
-    this.state={
-      loggedIn : false
-    }
-  }
+  
 
   render() {
     return (
       <Router>
               <Route path="/" exact component={Login}/>
               <Route path="/home" component={InPage}/>
-              <Route exact path={["/employee", "/employee/all"]} component={AllEmployee} onEnter={this.requireAuth}/>
               <Route path="/attendance" component={AllAttendance} />
               <Route path="/addemployee" component={Addemployee} />
               <Route path="/sites" component={Sites}/>
               <Route path="/employee/:id" component={Employee} />
+              <Route exact path="/employee" component={AllEmployee}/>
       </Router>
     );
   }

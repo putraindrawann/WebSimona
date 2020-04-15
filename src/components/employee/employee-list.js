@@ -15,9 +15,6 @@ export default class AllEmployee extends Component {
 
     this.state = {
       employee: [],
-      isLoaded: false,
-      redirectToReferrer:false,
-      token:'',
       searchName: ""
     };
 
@@ -51,7 +48,7 @@ export default class AllEmployee extends Component {
         console.log(response.data);
       })
       .catch(e => {
-        console.log(e);
+        // console.log(e);
       });
   }
 
@@ -66,7 +63,7 @@ export default class AllEmployee extends Component {
         <Navigation />
       
       <div className="col-lg">
-        
+        <br />
 
           <div className="col-md-8">
                     <div className="input-group mb-3">

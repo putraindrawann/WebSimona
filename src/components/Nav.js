@@ -1,24 +1,39 @@
 import React, { Component } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { Button} from "reactstrap"
 import { Link } from "react-router-dom";
-import { Nav, NavDropdown, Dropdown } from 'react-bootstrap';
-
+import { Nav  } from 'react-bootstrap';
+import "../App.css"
 
 export default class Navigation extends Component {
+  
+
+ handleLogout() {
+  sessionStorage.clear();
+  this.props.history.replace({pathname: '/'});
+  }
 
     render() {
+
         return (
             <Nav className="navbar navbar-custom navbar-expand navbar-dark">
-            <a href="/home" className="navbar-brand ">
-              SIMONA
-            </a>
             <div className="navbar-nav ">
+                <Link to={"/home"} className="nav-link">
+                  SIMONA
+                </Link>
+              </div>
+            
+            <div className="navbar-nav ">
+              
               <li className="nav-item">
-                  <NavDropdown title="Employee" id="basic-nav-dropdown">
-                    <Dropdown.Item href="/employee">All Employee</Dropdown.Item>
-                  <Dropdown.Divider />
-                    <Dropdown.Item href="/addemployee">Add Employee</Dropdown.Item>
-                  </NavDropdown>
+                <Link to={"/employee"} className="nav-link">
+                  Employee
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link to={"/addemployee"} className="nav-link">
+                  Add Employee
+                </Link>
               </li>
               <li className="nav-item">
                 <Link to={"/attendance"} className="nav-link">
@@ -31,6 +46,7 @@ export default class Navigation extends Component {
                 </Link>
               </li>
             </div>
+            <Link to="/"><Button size="tiny" onClick={this.handleLogout}>Logout</Button></Link>
           </Nav>
         )
 

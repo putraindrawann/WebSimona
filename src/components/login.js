@@ -14,9 +14,7 @@ class Login extends Component {
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
-
-
-
+    
     handleChange(event){
             this.setState({
                 [event.target.name] : event.target.value
@@ -51,17 +49,22 @@ class Login extends Component {
 
 
     render (){
-      console.log(this.props)
 
         return (
             <div className="app flex-row align-items-center">  
             <Container>  
+              <Row className="justify-content-center">
+                <img src="/smmlogo.png" alt="new" width="150" height="150"/>
+              </Row>
+              <br/>
+      
               <Row className="justify-content-center">  
-                <Col md="12" lg="10" xl="8">  
+                <Col md="6" lg="2" xl="5">  
                   <Card className="mx-4">  
                     <CardBody className="p-4">  
                       <Form ref="formdemo" onSubmit={this.handleSubmit}>  
-                        <h1>Login</h1>
+                        <h1>Login Simona Web</h1>
+                        <br/>
       
                         <InputGroup className="mb-3">
                           <Input type="text" name="user_name" onChange={this.handleChange} placeholder="Username" />
@@ -71,10 +74,9 @@ class Login extends Component {
                           <Input type="password" name="password" onChange={this.handleChange} placeholder="Password" />
                         </InputGroup> 
 
-                    
-                      <Row>  
+                      <Row className="justify-content-center">   
                         <Col xs="12" sm="4">  
-                          <Button type="submit" className="btn btn-info mb-1" block><span>Submit</span></Button>  
+                          <Button type="submit" className="button-form" block><span>Submit</span></Button>  
                         </Col> 
                       </Row>   
                       </Form>  

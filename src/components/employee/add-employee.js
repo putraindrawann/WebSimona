@@ -2,7 +2,8 @@ import React, { Component } from 'react'
 import axios from 'axios';  
 import { Button, Card, CardBody, CardFooter, Col, Container, Form, Input, InputGroup, Row } from 'reactstrap';  
 import { Redirect } from "react-router-dom";
-import Navigation from "../Nav"
+import Navigation from "../Nav";
+import "../../App.css";
 
 export default class Addemployee extends Component {  
     constructor(props) {
@@ -13,6 +14,7 @@ export default class Addemployee extends Component {
             nfcId: '', 
             gender: '', 
             blood_type: '', 
+            // image: `https://randomuser.me/api/portraits/lego/${this.imageloop}.jpg`,
             image: '',
             phone_number:'',
             address:'',
@@ -21,11 +23,17 @@ export default class Addemployee extends Component {
             identity:'',
             distant_relative:'',
             place:'',
-            siteName:''
+            siteName:'',
+            departement:'',
+            position:''
         };
     
       }
     
+  imageloop() {
+    Math.floor(Math.random() * 10);
+  }
+
   Insertemployee = (e) => {  
     e.preventDefault(); 
     axios.post(`${process.env.REACT_APP_WS_URL}/employee`, this.state)
@@ -42,7 +50,7 @@ export default class Addemployee extends Component {
     this.setState({[e.target.name]: e.target.value});  
   }  
 
-  cancelCourse = () => { 
+  Clear = () => { 
     this.setState({
         name: '', 
         qrId: '', 
@@ -57,17 +65,19 @@ export default class Addemployee extends Component {
         identity:'',
         distant_relative:'',
         place:'',
-        siteName:''
+        siteName:'',
+        departement:'',
+        position:''
 
     });
   }
   
   render() {
-    const { name, qrId, nfcId,gender,blood_type,image,phone_number,address,birth_place,birth_date,identity , 
-        distant_relative, place, siteName } = this.state
+    const { name, qrId, nfcId,gender,blood_type,phone_number,address,birth_place,birth_date,identity , 
+        distant_relative, place, siteName, departement, position } = this.state
 
     if (this.state.toDashboard === true) {
-        return <Redirect to='/employee/all' />
+        return <Redirect to='/employee' />
       }
 
   return (  
@@ -84,26 +94,20 @@ export default class Addemployee extends Component {
               <CardBody className="p-4">  
                 <Form onSubmit={this.Insertemployee}>  
                   <h1>Add Employee</h1>
-
+                  
                   <InputGroup className="mb-3">
-                    <Input type="text" placeholder="Photos" name="image" value={image} onChange={ this.onChange }  />  
-                  </InputGroup> 
-
-                  <InputGroup className="mb-3">
-                    <Input type="text" placeholder="Name" name="name" value={name} onChange={ this.onChange }  />  
+                    <Input type="text" placeholder="Name" name="name" value={name} required onChange={ this.onChange }  />  
                   </InputGroup> 
 
                    <InputGroup className="mb-3"> 
-                    <Input type="text" placeholder="QrId" name="qrId" value={qrId} onChange={ this.onChange }/>  
+                    <Input type="text" placeholder="QrId" name="qrId" value={qrId} required onChange={ this.onChange }/>  
                   </InputGroup>  
 
                   <InputGroup className="mb-3">
                     <Input type="text" placeholder="NfcId" name="nfcId" value={nfcId} onChange={ this.onChange }  />  
                   </InputGroup> 
 
-                  <InputGroup  sm={2} className="mb-4">
-                    {/* <Input type="text" placeholder="Gender" name="gender" value={gender} onChange={ this.onChange }  />   */}
-                    
+                  <InputGroup className="mb-4">
                     <select className="custom-select" name="gender" value={gender} onChange={ this.onChange }>
                         <option >Choose Gender</option>
                         <option value="male">Male</option>
@@ -112,11 +116,17 @@ export default class Addemployee extends Component {
                   </InputGroup> 
 
                   <InputGroup className="mb-4">
-                    <Input type="text" placeholder="Blood Type" name="blood_type" value={blood_type} onChange={ this.onChange } />  
+                    <select className="custom-select" name="blood_type" value={blood_type} onChange={ this.onChange }>
+                        <option>Choose Blood Type</option>
+                        <option value="O">O</option>
+                        <option value="A">A</option>
+                        <option value="B">B</option>
+                        <option value="AB">AB</option>
+                    </select>
                   </InputGroup> 
 
                   <InputGroup className="mb-4">
-                     <Input type="text" placeholder="Phone" name="phone_number" value={phone_number} onChange={ this.onChange } />  
+                     <Input type="number" placeholder="Phone" name="phone_number" value={phone_number} onChange={ this.onChange } />  
                   </InputGroup> 
 
                   <InputGroup className="mb-4">
@@ -128,11 +138,34 @@ export default class Addemployee extends Component {
                   </InputGroup>   
 
                   <InputGroup className="mb-4">
-                    <Input type="text" placeholder="Birth Date" name="birth_date" value={birth_date} onChange={ this.onChange }  />  
+                    <Input type="date" placeholder="Birth Date" name="birth_date" value={birth_date} onChange={ this.onChange }  />  
+                  </InputGroup> 
+ 
+                  <InputGroup className="mb-4">
+                    <select className="custom-select" name="identity" value={identity} onChange={ this.onChange }>
+                        <option >Choose Identity</option>
+                        <option value="Simper">Simper</option>
+                        <option value="ID Card">ID Card</option>
+                    </select>
                   </InputGroup> 
 
                   <InputGroup className="mb-4">
-                    <Input type="text" placeholder="Identity" name="identity" value={identity} onChange={ this.onChange }  />  
+                    <select className="custom-select" name="departement" value={departement} onChange={ this.onChange }>
+                        <option >Choose Departement</option>
+                        <option value="IT">IT</option>
+                        <option value="Finance">Finance</option>
+                        <option value="Human Resource">Human Resource</option>
+                        <option value="SCM">Supply Chain Management</option>
+                    </select>
+                  </InputGroup> 
+
+                  <InputGroup className="mb-4">
+                    <select className="custom-select" name="position" value={position} onChange={ this.onChange }>
+                        <option >Choose Position</option>
+                        <option value="Staff">Staff</option>
+                        <option value="Supervisor">Supervisor</option>
+                        <option value="Manager">Manager</option>
+                    </select>
                   </InputGroup> 
 
                   <InputGroup className="mb-4">
@@ -140,23 +173,37 @@ export default class Addemployee extends Component {
                   </InputGroup> 
 
                   <InputGroup className="mb-4">
-                    <Input type="text" placeholder="Place" name="place" value={place} onChange={ this.onChange }  />  
-                  </InputGroup>   
+                    <select className="custom-select" name="place" value={place} onChange={ this.onChange }>
+                        <option >Choose Place</option>
+                        <option value="Mine A">Mine A</option>
+                        <option value="Mine B">Mine B</option>
+                        <option value="Mine C">Mine C</option>
+                        <option value="Mine D">Mine D</option>
+                        <option value="Mine R">Mine E</option>
+                    </select>
+                  </InputGroup> 
 
                   <InputGroup className="mb-4">
-                    <Input type="text" placeholder="Site Name" name="siteName" value={siteName} onChange={ this.onChange }  />  
+                    <select className="custom-select" name="siteName" value={siteName} onChange={ this.onChange }>
+                        <option >Choose Site Name</option>
+                        <option value="berau1">Berau Coal Kaltim Site A</option>
+                        <option value="berau2">Berau Coal Kaltim Site B</option>
+                        <option value="berau3">Berau Coal Kaltim Site C</option>
+                        <option value="berau4">Berau Coal Kaltim Site D</option>
+                        <option value="berau5">Berau Coal Kaltim Site E</option>
+                    </select>
                   </InputGroup> 
 
              <CardFooter className="p-4">  
                 <Row>  
                   <Col xs="12" sm="4">  
-                    <Button type="submit" className="btn btn-info mb-1" block><span>Save</span></Button>  
+                    <Button type="submit" className="button-form" block><span>Save</span></Button>  
                   </Col>
                   <Col xs="12" sm="4">  
-                    <Button name="cancelCourse" onClick={this.cancelCourse} className="btn btn-info mb-1" block><span>Clear</span></Button>  
+                    <Button name="Clear" onClick={this.Clear} className="button-form" block><span>Clear</span></Button>  
                   </Col> 
                   <Col xs="12" sm="4">  
-                    <Button className="btn btn-info mb-1" block><span>Cancel</span></Button>  
+                    <Button  className="button-form" block><span>Cancel</span></Button>  
                   </Col>  
                 </Row>  
               </CardFooter>  

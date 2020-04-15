@@ -57,20 +57,30 @@ export default class Employee extends Component {
  
 
   jsPdfGenerator = () => { 
-    const { currentEmployee } = this.state;
+    const { currentEmployee , Employeeattendance} = this.state;
 
-
+    var doc = new jsPDF('p','pt');
     currentEmployee.map(currentEmployee => {
       
-    var doc = new jsPDF('p','pt');
+    
     doc.text(100,40, 'Absence Employee')
     doc.text(100, 80, 'Nama                      : '+currentEmployee.name)
     doc.text(100, 100, 'Birth Place & Date  : '+currentEmployee.birth_place+','+currentEmployee.birth_date)
     doc.text(100, 120, 'Adress                    : '+currentEmployee.address)
     doc.text(100, 140, 'Site                         : '+currentEmployee.place)
-
     doc.save(`Absence ${currentEmployee.name}.pdf`);
+
     return currentEmployee;
+    })
+
+    Employeeattendance && Employeeattendance.attendances.map(attendance => {
+           
+      doc.text( attendance.id)
+      doc.text( attendance.date)
+      doc.text( attendance.enter_at)
+      doc.text( attendance.out_at)
+      
+      return Employeeattendance;
     })
   }
 
@@ -99,6 +109,8 @@ export default class Employee extends Component {
                   <li><label><strong>Adress : </strong>{currentEmployee.address}</label></li>
                   <li><label><strong>Phone : </strong>{currentEmployee.phone_number}</label></li>
                   <li><label><strong>Identity : </strong>{currentEmployee.identity}</label></li>
+                  <li><label><strong>Departement : </strong>{currentEmployee.departement}</label></li>
+                  <li><label><strong>Position : </strong>{currentEmployee.position}</label></li>
                   <li><label><strong>NFC Id : </strong>{currentEmployee.nfcId}</label></li>
                   <li><label><strong>QR Id : </strong>{currentEmployee.qrId}</label></li>
                   <li><label>
